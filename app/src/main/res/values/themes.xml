@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.AnNet" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+    </style>
+
+    <style name="BottomAppBarTheme" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/BottomAppBarThemeOverlay</item>
+    </style>
+
+    <style name="BottomAppBarThemeOverlay" parent="">
+        <item name="colorOnSecondaryContainer">@color/primary</item>
+        <item name="colorOnSurface">@color/primary</item>
+    </style>
+
+    <style name="Theme.AnNet" parent="Base.Theme.AnNet" />
+</resources>
