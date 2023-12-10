@@ -5,4 +5,9 @@
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="notification">Notification</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_somebody">Find somebody...</string>
+    <string name="sample_profile_ink">https://xsgames.co/randomusers/avatar.php?g=female</string>
+    <string name="write_something">Write something...</string>
 </resources>

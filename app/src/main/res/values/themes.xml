@@ -10,8 +10,9 @@
     </style>
 
     <style name="BottomAppBarThemeOverlay" parent="">
-        <item name="colorOnSecondaryContainer">@color/primary</item>
-        <item name="colorOnSurface">@color/primary</item>
+        <item name="colorSecondaryContainer">@color/primary_alpha50</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
     </style>
 
     <style name="Theme.AnNet" parent="Base.Theme.AnNet" />
