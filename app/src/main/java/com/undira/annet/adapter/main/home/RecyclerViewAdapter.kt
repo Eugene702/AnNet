@@ -1,28 +1,38 @@
 package com.undira.annet.adapter.main.home
 
-import android.view.View
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.undira.annet.databinding.ComponentStatusCardBinding
 import com.undira.annet.model.Post
 
 class RecyclerViewAdapter(
-    val data: ArrayList<Post>
+    private val context: Context,
+    private val data: ArrayList<Post>
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-    abstract class ViewHolder(val view: ComponentStatusCardBinding ): RecyclerView.ViewHolder(view.root)
+    class ViewHolder(private val context: Context, private val view: ComponentStatusCardBinding ): RecyclerView.ViewHolder(view.root){
+        fun bind(data: Post){
+            Glide.with(context)
+                .load(data.avatar)
+                .into(view.avatar)
+            view.name.text = data.name
+            view.content.text = data.content
+        }
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerViewAdapter.ViewHolder {
-        TODO("Not yet implemented")
+        val binding: ComponentStatusCardBinding = ComponentStatusCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(context, binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(data[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int  = data.size
 }

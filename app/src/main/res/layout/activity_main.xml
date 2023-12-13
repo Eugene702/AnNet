@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/background"
     tools:context=".activity.MainActivity">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -19,6 +20,6 @@
         app:menu="@menu/main_menu"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="selected"
-        app:backgroundTint="@android:color/transparent"/>
+        app:backgroundTint="@android:color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

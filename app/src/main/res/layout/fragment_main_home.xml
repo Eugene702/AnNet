@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/background"
     tools:context=".fragment.main.MainHomeFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="20dp">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,36 +37,32 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/status_box_input_layout"
                         android:layout_width="0dp"
+                        style="?attr/textInputFilledDenseStyle"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/gray_400"
+                        app:hintTextColor="@color/primary"
                         app:layout_constraintTop_toTopOf="@id/status_box_avatar"
                         app:layout_constraintStart_toEndOf="@id/status_box_avatar"
                         app:layout_constraintBottom_toBottomOf="@id/status_box_avatar"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:boxBackgroundColor="@android:color/transparent"
                         android:hint="@string/write_something"
-                        app:boxStrokeWidth="0dp">
+                        app:boxStrokeWidth="0dp"
+                        app:cursorColor="@color/black"
+                        app:boxStrokeWidthFocused="0dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Button
-                        android:id="@+id/status_box_image_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/status_box_avatar"
-                        app:layout_constraintStart_toStartOf="@id/status_box_avatar"
-                        app:layout_constraintEnd_toEndOf="@id/status_box_avatar"
-                        android:layout_marginTop="10dp"
-                        app:icon="@drawable/ic_image"
-                        style="?attr/materialIconButtonStyle"/>
 
                     <Button
                         android:id="@+id/status_box_post_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/status_box_image_btn"
-                        app:layout_constraintBottom_toBottomOf="@id/status_box_image_btn"
+                        app:layout_constraintTop_toBottomOf="@id/status_box_input_layout"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         android:text="@string/post"
                         app:backgroundTint="@color/black"
                         app:shapeAppearance="?attr/shapeAppearance"/>
@@ -77,18 +73,21 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="50dp"
+                android:paddingBottom="100dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background">
         <com.google.android.material.search.SearchBar
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/find_somebody"
+            android:backgroundTint="@color/background"
             app:menu="@menu/main_home_fragment_menu"/>
     </com.google.android.material.appbar.AppBarLayout>
 
