@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/background"
+    android:background="@color/background"
     tools:context=".fragment.main.MainHomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -80,13 +80,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background">
+        android:backgroundTint="@android:color/transparent">
         <com.google.android.material.search.SearchBar
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/find_somebody"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/white"
             app:menu="@menu/main_home_fragment_menu"/>
     </com.google.android.material.appbar.AppBarLayout>
 

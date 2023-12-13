@@ -1,7 +1,6 @@
 package com.undira.annet.fragment.main
 
 import android.content.Intent
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -23,7 +20,7 @@ import com.undira.annet.R
 import com.undira.annet.activity.SearchActivity
 import com.undira.annet.adapter.main.home.RecyclerViewAdapter
 import com.undira.annet.databinding.FragmentMainHomeBinding
-import com.undira.annet.view_model.main.HomeViewModel
+import com.undira.annet.view_model.main.home.HomeViewModel
 import kotlinx.coroutines.launch
 
 class MainHomeFragment : Fragment() {

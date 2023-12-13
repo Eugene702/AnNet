@@ -1,4 +1,4 @@
-package com.undira.annet.view_model.main
+package com.undira.annet.view_model.main.home
 
 import androidx.lifecycle.ViewModel
 import com.undira.annet.model.Post
