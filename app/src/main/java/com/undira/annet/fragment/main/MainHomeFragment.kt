@@ -1,5 +1,6 @@
 package com.undira.annet.fragment.main
 
+import android.content.Intent
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.undira.annet.R
+import com.undira.annet.activity.SearchActivity
 import com.undira.annet.adapter.main.home.RecyclerViewAdapter
 import com.undira.annet.databinding.FragmentMainHomeBinding
 import com.undira.annet.view_model.main.HomeViewModel
@@ -45,6 +47,8 @@ class MainHomeFragment : Fragment() {
     }
 
     private fun configureSearchBar(){
+        binding.searchBar.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
+
         try {
             val profileUrl: String = resources.getString(R.string.sample_profile_ink)
             Glide.with(requireContext())

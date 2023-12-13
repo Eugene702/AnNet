@@ -20,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 app:strokeWidth="0dp"
-                app:cardElevation="5dp"
                 app:cardBackgroundColor="@color/white">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

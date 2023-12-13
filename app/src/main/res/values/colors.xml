@@ -6,4 +6,5 @@
     <color name="primary">#2563EB</color>
     <color name="primary_alpha50">#802563EB</color>
     <color name="gray_400">#9ca3af</color>
+    <color name="gray_600">#52525b</color>
 </resources>
