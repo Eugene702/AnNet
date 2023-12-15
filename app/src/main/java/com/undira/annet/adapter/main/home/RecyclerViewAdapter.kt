@@ -1,10 +1,12 @@
 package com.undira.annet.adapter.main.home
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.undira.annet.activity.DetailPostActivity
 import com.undira.annet.databinding.ComponentStatusCardBinding
 import com.undira.annet.model.Post
 
@@ -19,6 +21,7 @@ class RecyclerViewAdapter(
                 .into(view.avatar)
             view.name.text = data.name
             view.content.text = data.content
+            view.root.setOnClickListener { view.root.context.startActivity(Intent(view.root.context, DetailPostActivity::class.java)) }
         }
     }
 
