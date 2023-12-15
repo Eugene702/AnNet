@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AnNet"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DetailPostActivity"
             android:exported="false" />
         <activity

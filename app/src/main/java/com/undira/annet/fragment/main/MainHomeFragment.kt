@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.undira.annet.R
+import com.undira.annet.activity.ProfileActivity
 import com.undira.annet.activity.SearchActivity
 import com.undira.annet.adapter.main.home.RecyclerViewAdapter
 import com.undira.annet.databinding.FragmentMainHomeBinding
@@ -45,6 +46,7 @@ class MainHomeFragment : Fragment() {
 
     private fun configureSearchBar(){
         binding.searchBar.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
+        binding.searchBar.inflateMenu(R.menu.main_home_fragment_menu)
 
         try {
             val profileUrl: String = resources.getString(R.string.sample_profile_ink)
@@ -72,6 +74,16 @@ class MainHomeFragment : Fragment() {
                     ): Boolean {
                         lifecycleScope.launch {
                             binding.searchBar.menu.findItem(R.id.profile).icon = resource
+                        }
+
+                        binding.searchBar.setOnMenuItemClickListener {
+                            when(it.itemId){
+                                R.id.profile -> {
+                                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                                    true
+                                }
+                                else -> false
+                            }
                         }
 
                         return true
