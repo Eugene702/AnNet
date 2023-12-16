@@ -7,4 +7,5 @@
     <color name="primary_alpha50">#802563EB</color>
     <color name="gray_400">#9ca3af</color>
     <color name="gray_600">#52525b</color>
+    <color name="gray_200">#e5e7eb</color>
 </resources>

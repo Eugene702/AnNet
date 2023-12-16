@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@id/like_button"
                 app:layout_constraintEnd_toStartOf="@id/send_comment_btn"
                 android:hint="@string/enter_your_comment"
-                app:boxBackgroundColor="#e5e7eb"
+                app:boxBackgroundColor="@color/gray_200"
                 app:shapeAppearance="?attr/shapeAppearanceCornerLarge"
                 android:layout_marginTop="10dp"
                 app:boxStrokeWidth="0dp"
