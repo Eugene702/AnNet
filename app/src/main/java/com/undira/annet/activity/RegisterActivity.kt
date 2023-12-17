@@ -1,13 +1,14 @@
 package com.undira.annet.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.undira.annet.R
 import com.undira.annet.databinding.ActivityRegisterBinding
+import com.undira.annet.model.UserInsert
 import com.undira.annet.view_model.register.ViewModel
 import kotlinx.coroutines.launch
 
@@ -22,19 +23,56 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signinText.setOnClickListener {
-            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
             finish()
         }
 
         binding.registerBtn.setOnClickListener {
             if(formValidateInput()){
-                binding.registerBtn.text = "Sedang memuat"
-                binding.registerBtn.isEnabled = false
+                var isError: Boolean
+                var titleDialog: String
+                var messagesDialog: String
+
                 lifecycleScope.launch {
-                    viewModel.registerUser(emailUser = binding.emailInput.text.toString(), passwordUser = binding.passwordInput.text.toString())
+                    binding.registerBtn.text = resources.getString(R.string.loading)
+                    binding.registerBtn.isEnabled = false
+
+                    try {
+                        viewModel.registerUser(emailUser = binding.emailInput.text.toString(), passwordUser = binding.passwordInput.text.toString())
+                        val checkUser: Long? = viewModel.checkUser(emailUser = binding.emailInput.text.toString()).countOrNull()
+
+                        if(checkUser?.toInt() == 0){
+                            isError = false
+                            viewModel.insertUser(UserInsert(email = binding.emailInput.text.toString(), name = binding.nameInput.text.toString()))
+                            titleDialog = "Account registered successfully!"
+                            messagesDialog = "Your account has been successfully registered, please check your email to activate your account!"
+                        }else{
+                            isError = true
+                            titleDialog = "Account registered!"
+                            messagesDialog = "Your email has been registered!"
+                        }
+                    }catch (_: Exception){
+                        isError = true
+                        titleDialog = "Server error!"
+                        messagesDialog = "There's a server error!"
+                    }
+
+                    binding.registerBtn.text = resources.getString(R.string.register)
+                    binding.registerBtn.isEnabled = true
+
+                    MaterialAlertDialogBuilder(this@RegisterActivity)
+                        .setTitle(titleDialog)
+                        .setMessage(messagesDialog)
+                        .setPositiveButton(
+                            "Ok!"
+                        ) { dialog, _ ->
+                            if (!isError) {
+                                finish()
+                            } else {
+                                dialog.dismiss()
+                            }
+                        }
+                        .show()
                 }
-                binding.registerBtn.text = resources.getString(R.string.register)
-                binding.registerBtn.isEnabled = true
             }
         }
     }
