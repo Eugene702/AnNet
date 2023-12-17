@@ -51,4 +51,10 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation(platform("io.github.jan-tennert.supabase:bom:2.0.1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.ktor:ktor-client-cio:2.3.7")
+
 }
