@@ -12,7 +12,6 @@ import com.undira.annet.adapter.main.ViewPagerAdapter
 import com.undira.annet.databinding.ActivityMainBinding
 import com.undira.annet.fragment.main.MainChatFragment
 import com.undira.annet.fragment.main.MainHomeFragment
-import com.undira.annet.fragment.main.MainNotificationFragment
 import com.undira.annet.view_model.main.ViewModel
 import io.github.jan.supabase.gotrue.user.UserInfo
 
@@ -42,15 +41,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureBottomNavigation(){
         val badgeMessage = binding.bottomNavigation.getOrCreateBadge(R.id.message)
-        val badgeNotification = binding.bottomNavigation.getOrCreateBadge(R.id.notification)
 
         badgeMessage.number = 3
-        badgeNotification.number = 3
 
         binding.bottomNavigation.setOnItemSelectedListener {
             val selectedIndex: Int = when(it.itemId){
                 R.id.message -> 1
-                R.id.notification -> 2
                 else -> 0
             }
 
@@ -63,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         val fragmentList: ArrayList<Fragment> = arrayListOf(
             MainHomeFragment(),
             MainChatFragment(),
-            MainNotificationFragment()
         )
 
         binding.viewpager.adapter = ViewPagerAdapter(fragmentList, supportFragmentManager, lifecycle)
@@ -72,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 val selectedIndex: Int = when(position){
                     1 -> R.id.message
-                    2 -> R.id.notification
                     else -> R.id.home
                 }
 

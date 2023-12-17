@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_repeat_password_input"
         app:layout_constraintStart_toStartOf="@id/layout_repeat_password_input"
         app:layout_constraintEnd_toEndOf="@id/layout_repeat_password_input"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp" />
 
     <LinearLayout
         android:layout_width="0dp"

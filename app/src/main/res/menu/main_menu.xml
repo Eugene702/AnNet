@@ -12,10 +12,4 @@
         android:icon="@drawable/ic_message"
         app:showAsAction="ifRoom"
         android:title="@string/chat"/>
-
-    <item
-        android:id="@+id/notification"
-        android:icon="@drawable/ic_bell"
-        app:showAsAction="ifRoom"
-        android:title="@string/notification"/>
 </menu>
