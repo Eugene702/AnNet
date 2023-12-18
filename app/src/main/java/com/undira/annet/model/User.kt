@@ -21,8 +21,3 @@ data class UserLogin(
     val email: String,
     val password: String
 )
-
-@Serializable
-data class UserUUID(
-    val id: String
-)

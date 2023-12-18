@@ -49,7 +49,7 @@ class MainHomeFragment : Fragment() {
         binding.searchBar.inflateMenu(R.menu.main_home_fragment_menu)
 
         try {
-            val profileUrl: String = resources.getString(R.string.sample_profile_ink)
+            val profileUrl: String = "https://ui-avatars.com/api/?name="
             Glide.with(requireContext())
                 .load(profileUrl)
                 .centerCrop()

@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.undira.annet.R
 import com.undira.annet.databinding.ActivityLoginBinding
+import com.undira.annet.model.User
 import com.undira.annet.model.UserLogin
-import com.undira.annet.model.UserUUID
 import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.login.ViewModel
 import kotlinx.coroutines.flow.first
@@ -40,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
                     if(userExist != null && userExist.toInt() == 1){
                         try {
                             viewModel.loginUser(UserLogin(email = binding.emailInput.text.toString(), password = binding.passwordInput.text.toString()))
-                            val getUuid = viewModel.getUuidUser(emailUser = binding.emailInput.text.toString()).decodeSingle<UserUUID>()
-                            store.saveUser(getUuid.id)
+                            val getUuid = viewModel.getUuidUser(emailUser = binding.emailInput.text.toString()).decodeSingle<User>()
+                            store.saveUser(getUuid)
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         }catch (e: Exception){

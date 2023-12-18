@@ -16,7 +16,11 @@ import com.undira.annet.fragment.main.MainChatFragment
 import com.undira.annet.fragment.main.MainHomeFragment
 import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.main.ViewModel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -32,26 +36,24 @@ class MainActivity : AppCompatActivity() {
         store = UserStore(this@MainActivity)
         setContentView(binding.root)
 
-        checkUserLogin()
-        configureBottomNavigation()
-        initializeViewPager()
+
+        lifecycleScope.launch {
+            checkUserLogin()
+            configureBottomNavigation()
+            initializeViewPager()
+        }
+
     }
 
-    private fun checkUserLogin(){
-        lifecycleScope.launch {
-            val credential: String? = store.readUserCredential.firstOrNull()
-            if(credential == null){
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                finish()
-            }
+    private suspend fun checkUserLogin(){
+        val credential: String? = store.getUuid.firstOrNull()
+        if(credential == null){
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
         }
     }
 
     private fun configureBottomNavigation(){
-        val badgeMessage = binding.bottomNavigation.getOrCreateBadge(R.id.message)
-
-        badgeMessage.number = 3
-
         binding.bottomNavigation.setOnItemSelectedListener {
             val selectedIndex: Int = when(it.itemId){
                 R.id.message -> 1

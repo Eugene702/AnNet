@@ -10,7 +10,6 @@ import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.postgrest
-import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Count
 import io.github.jan.supabase.postgrest.result.PostgrestResult
 
@@ -31,7 +30,7 @@ class ViewModel: ViewModel() {
     }
 
     suspend fun getUuidUser(emailUser: String): PostgrestResult {
-        val data = provider.postgrest.from("users").select(columns = Columns.list("id")) {
+        val data = provider.postgrest.from("users").select {
             filter {
                 User::email eq emailUser
             }
