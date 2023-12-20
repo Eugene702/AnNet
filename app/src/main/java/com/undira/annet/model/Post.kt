@@ -1,5 +1,7 @@
 package com.undira.annet.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 data class Post(
@@ -16,10 +18,11 @@ data class PostInsert(
 )
 
 @Serializable
+@Parcelize
 data class PostGetAll(
     val id: String,
     val id_users: String,
     val content: String,
     val date: String,
     val users: UserPost
-)
+): Parcelable

@@ -22,8 +22,11 @@ class RecyclerViewAdapter(
                 .into(view.avatar)
             view.name.text = data.users.name
             view.content.text = data.content
-            view.root.setOnClickListener { view.root.context.startActivity(Intent(view.root.context, DetailPostActivity::class.java)) }
-            view.commentBtn.setOnClickListener { view.root.context.startActivity(Intent(view.root.context, DetailPostActivity::class.java)) }
+
+            val intent = Intent(view.root.context, DetailPostActivity::class.java)
+            intent.putExtra(DetailPostActivity.DETAIL_POST, data)
+            view.root.setOnClickListener { view.root.context.startActivity(intent) }
+            view.commentBtn.setOnClickListener { view.root.context.startActivity(intent) }
         }
     }
 
