@@ -14,7 +14,6 @@ import com.undira.annet.model.User
 import com.undira.annet.model.UserLogin
 import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.login.ViewModel
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

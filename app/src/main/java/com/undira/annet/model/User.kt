@@ -21,3 +21,8 @@ data class UserLogin(
     val email: String,
     val password: String
 )
+
+@Serializable
+data class UserPost(
+    val name: String
+)

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,12 +22,18 @@ import com.undira.annet.activity.ProfileActivity
 import com.undira.annet.activity.SearchActivity
 import com.undira.annet.adapter.main.home.RecyclerViewAdapter
 import com.undira.annet.databinding.FragmentMainHomeBinding
+import com.undira.annet.model.PostGetAll
+import com.undira.annet.model.PostInsert
+import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.main.home.HomeViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 class MainHomeFragment : Fragment() {
     private lateinit var binding: FragmentMainHomeBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var userStore: UserStore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,22 +41,60 @@ class MainHomeFragment : Fragment() {
     ): View {
         binding = FragmentMainHomeBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-        configureSearchBar()
-        initializeRecyclerView()
+        userStore = UserStore(requireContext())
+
+        lifecycleScope.launch {
+            binding.loading.isVisible = true
+            configureSearchBar()
+            initializeRecyclerView()
+            binding.loading.isVisible = false
+            setupStatusBox()
+        }
         return binding.root
     }
 
-    private fun initializeRecyclerView(){
-        binding.recyclerView.adapter = RecyclerViewAdapter(requireContext(), viewModel.data)
+    private suspend fun setupStatusBox(){
+        val profileUrl = "https://ui-avatars.com/api/?name=${userStore.getName.first()}"
+        Glide.with(requireContext())
+            .load(profileUrl)
+            .into(binding.statusBoxAvatar)
+
+        binding.statusBoxPostBtn.setOnClickListener {
+            binding.statusBoxInputLayout.isErrorEnabled = false
+
+            if(binding.statuxBoxInput.text.toString().trim().isNotEmpty()){
+                lifecycleScope.launch {
+                    binding.statusBoxPostBtn.isEnabled = false
+                    binding.statusBoxPostBtn.text = resources.getString(R.string.loading)
+
+                    if(userStore.getUuid.firstOrNull() != null){
+                        val uuid = userStore.getUuid
+                        viewModel.addPost(PostInsert(id_users = uuid.first().toString(), content = binding.statuxBoxInput.text.toString()))
+                        initializeRecyclerView()
+                    }
+
+                    binding.statusBoxPostBtn.isEnabled = true
+                    binding.statusBoxPostBtn.text = resources.getString(R.string.post)
+                    binding.statuxBoxInput.text?.clear()
+                }
+            }else{
+                binding.statusBoxInputLayout.error = "Input cannot be empty!"
+            }
+        }
+    }
+
+    private suspend fun initializeRecyclerView(){
+        val data: List<PostGetAll> = viewModel.getData()
+        binding.recyclerView.adapter = RecyclerViewAdapter(requireContext(), data)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun configureSearchBar(){
+    private suspend fun configureSearchBar(){
         binding.searchBar.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
         binding.searchBar.inflateMenu(R.menu.main_home_fragment_menu)
 
         try {
-            val profileUrl: String = "https://ui-avatars.com/api/?name="
+            val profileUrl = "https://ui-avatars.com/api/?name=${userStore.getName.first()}"
             Glide.with(requireContext())
                 .load(profileUrl)
                 .centerCrop()

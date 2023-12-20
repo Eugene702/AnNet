@@ -8,20 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.undira.annet.activity.DetailPostActivity
 import com.undira.annet.databinding.ComponentStatusCardBinding
-import com.undira.annet.model.Post
+import com.undira.annet.model.PostGetAll
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private val data: ArrayList<Post>
+    private val data: List<PostGetAll>
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(private val context: Context, private val view: ComponentStatusCardBinding ): RecyclerView.ViewHolder(view.root){
-        fun bind(data: Post){
+        fun bind(data: PostGetAll){
+            val profileUrl: String = "https://ui-avatars.com/api/?name=${data.users.name}"
             Glide.with(context)
-                .load(data.avatar)
+                .load(profileUrl)
                 .into(view.avatar)
-            view.name.text = data.name
+            view.name.text = data.users.name
             view.content.text = data.content
             view.root.setOnClickListener { view.root.context.startActivity(Intent(view.root.context, DetailPostActivity::class.java)) }
+            view.commentBtn.setOnClickListener { view.root.context.startActivity(Intent(view.root.context, DetailPostActivity::class.java)) }
         }
     }
 

@@ -3,7 +3,6 @@ package com.undira.annet.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +15,7 @@ import com.undira.annet.fragment.main.MainChatFragment
 import com.undira.annet.fragment.main.MainHomeFragment
 import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.main.ViewModel
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
