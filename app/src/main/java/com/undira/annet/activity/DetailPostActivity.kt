@@ -3,14 +3,16 @@ package com.undira.annet.activity
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.undira.annet.R
 import com.undira.annet.adapter.detail_post.RecyclerViewAdapter
 import com.undira.annet.databinding.ActivityDetailPostBinding
 import com.undira.annet.model.CommentInput
+import com.undira.annet.model.CommentList
 import com.undira.annet.model.PostGetAll
 import com.undira.annet.view_model.detail_post.ViewModel
 import kotlinx.coroutines.launch
@@ -44,8 +46,8 @@ class DetailPostActivity : AppCompatActivity() {
 
         if(dataPost != null){
             initializeData()
-            formComment()
-            initializeRecyclerView()
+            formComment(idPost = dataPost!!.id)
+            initializeRecyclerView(idPost = dataPost!!.id)
         }
     }
 
@@ -58,7 +60,7 @@ class DetailPostActivity : AppCompatActivity() {
         binding.nameOwner.text = dataPost?.users?.name
         binding.content.text = dataPost?.content
     }
-    private fun formComment(){
+    private fun formComment(idPost: String){
         binding.sendCommentBtn.setOnClickListener {
             binding.commentInputLayout.isErrorEnabled = false
             if(binding.commentInput.text.toString().trim().isNotEmpty()){
@@ -67,6 +69,7 @@ class DetailPostActivity : AppCompatActivity() {
                     if(dataPost != null){
                         viewModel.addComment(CommentInput(dataPost!!.id, dataPost!!.id_users, binding.commentInput.text.toString()))
                         binding.commentInput.text?.clear()
+                        initializeRecyclerView(idPost)
                     }
                     binding.sendCommentBtn.isEnabled = true
                 }
@@ -76,9 +79,12 @@ class DetailPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeRecyclerView(){
-        binding.recyclerView.adapter = RecyclerViewAdapter(this@DetailPostActivity, viewModel.data)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    private fun initializeRecyclerView(idPost: String){
+        lifecycleScope.launch {
+            val data: List<CommentList> = viewModel.getAllComment(idPost)
+            binding.recyclerView.adapter = RecyclerViewAdapter(this@DetailPostActivity, data)
+            binding.recyclerView.layoutManager = LinearLayoutManager(this@DetailPostActivity)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

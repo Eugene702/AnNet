@@ -16,3 +16,13 @@ data class CommentInput(
     val id_user: String,
     val comment: String
 )
+
+@Serializable
+data class CommentList(
+    val id: Int,
+    val id_post: String,
+    val id_user: String,
+    val comment: String,
+    val date: String,
+    val users: UserPost
+)

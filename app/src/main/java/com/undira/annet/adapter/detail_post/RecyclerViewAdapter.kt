@@ -6,20 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.undira.annet.databinding.ComponentCommentListBinding
-import com.undira.annet.model.Comment
+import com.undira.annet.model.CommentList
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private val data: ArrayList<Comment>
+    private val data: List<CommentList>
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(private val context: Context, private val binding: ComponentCommentListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Comment){
+        fun bind(data: CommentList){
+            val profileUrl = "https://ui-avatars.com/api/?name=${data.users.name}"
             Glide.with(context)
-                .load(data.avatar)
+                .load(profileUrl)
                 .into(binding.avatar)
 
             binding.date.text = data.date
-            binding.name.text = data.name
+            binding.name.text = data.users.name
             binding.comment.text = data.comment
         }
     }

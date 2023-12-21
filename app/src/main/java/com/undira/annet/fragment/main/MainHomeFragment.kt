@@ -44,11 +44,15 @@ class MainHomeFragment : Fragment() {
         userStore = UserStore(requireContext())
 
         lifecycleScope.launch {
-            binding.loading.isVisible = true
-            configureSearchBar()
-            initializeRecyclerView()
-            binding.loading.isVisible = false
-            setupStatusBox()
+            val userUuid: String? = userStore.getUuid.firstOrNull()
+
+            if(userUuid != null){
+                binding.loading.isVisible = true
+                configureSearchBar()
+                initializeRecyclerView()
+                binding.loading.isVisible = false
+                setupStatusBox()
+            }
         }
         return binding.root
     }

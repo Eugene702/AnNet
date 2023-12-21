@@ -83,8 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:indicatorColor="@color/primary"
-        android:indeterminate="true" />
+        android:indeterminate="true"
+        app:indicatorColor="@color/primary" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
