@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.undira.annet.databinding.ComponentCommentListBinding
 import com.undira.annet.model.CommentList
+import com.undira.annet.utils.convertTimestampToDate
 
 class RecyclerViewAdapter(
     private val context: Context,
@@ -19,7 +20,7 @@ class RecyclerViewAdapter(
                 .load(profileUrl)
                 .into(binding.avatar)
 
-            binding.date.text = data.date
+            binding.date.text = convertTimestampToDate(timeStamp = data.date)
             binding.name.text = data.users.name
             binding.comment.text = data.comment
         }

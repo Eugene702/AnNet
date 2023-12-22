@@ -3,8 +3,6 @@ package com.undira.annet.activity
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +12,7 @@ import com.undira.annet.databinding.ActivityDetailPostBinding
 import com.undira.annet.model.CommentInput
 import com.undira.annet.model.CommentList
 import com.undira.annet.model.PostGetAll
+import com.undira.annet.utils.convertTimestampToDate
 import com.undira.annet.view_model.detail_post.ViewModel
 import kotlinx.coroutines.launch
 
@@ -41,6 +40,7 @@ class DetailPostActivity : AppCompatActivity() {
         dataPost = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(DETAIL_POST, PostGetAll::class.java)
         } else {
+            @Suppress("DEPRECATION")
             intent.getParcelableExtra(DETAIL_POST)
         }
 
@@ -53,12 +53,14 @@ class DetailPostActivity : AppCompatActivity() {
 
     private fun initializeData(){
         val profileUrl = "https://ui-avatars.com/api/?name=${dataPost?.users?.name}"
+
         Glide.with(this@DetailPostActivity)
             .load(profileUrl)
             .into(binding.avatar)
 
         binding.nameOwner.text = dataPost?.users?.name
         binding.content.text = dataPost?.content
+        binding.datePost.text = dataPost?.date?.let { convertTimestampToDate(it) }
     }
     private fun formComment(idPost: String){
         binding.sendCommentBtn.setOnClickListener {

@@ -66,6 +66,7 @@
                 android:hint="@string/enter_your_comment"
                 app:boxBackgroundColor="@color/gray_200"
                 app:shapeAppearance="?attr/shapeAppearanceCornerLarge"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 app:boxStrokeWidth="0dp"
                 app:cursorColor="@color/black"
@@ -86,6 +87,7 @@
                 app:iconSize="24sp"
                 app:layout_constraintEnd_toEndOf="@id/content"
                 app:layout_constraintTop_toTopOf="@id/comment_input_layout"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="@id/comment_input_layout"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -94,6 +96,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/comment_input_layout"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
