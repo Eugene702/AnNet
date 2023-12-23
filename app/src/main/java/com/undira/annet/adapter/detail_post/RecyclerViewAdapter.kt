@@ -1,10 +1,12 @@
 package com.undira.annet.adapter.detail_post
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.undira.annet.activity.ProfileActivity
 import com.undira.annet.databinding.ComponentCommentListBinding
 import com.undira.annet.model.CommentList
 import com.undira.annet.utils.convertTimestampToDate
@@ -23,6 +25,13 @@ class RecyclerViewAdapter(
             binding.date.text = convertTimestampToDate(timeStamp = data.date)
             binding.name.text = data.users.name
             binding.comment.text = data.comment
+
+
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra(ProfileActivity.USER_ID, data.id_user)
+
+            binding.avatar.setOnClickListener { context.startActivity(intent) }
+            binding.name.setOnClickListener { context.startActivity(intent) }
         }
     }
 

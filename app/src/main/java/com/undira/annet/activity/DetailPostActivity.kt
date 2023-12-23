@@ -1,5 +1,6 @@
 package com.undira.annet.activity
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -45,13 +46,13 @@ class DetailPostActivity : AppCompatActivity() {
         }
 
         if(dataPost != null){
-            initializeData()
+            initializeData(idUser = dataPost!!.id_users)
             formComment(idPost = dataPost!!.id)
             initializeRecyclerView(idPost = dataPost!!.id)
         }
     }
 
-    private fun initializeData(){
+    private fun initializeData(idUser: String){
         val profileUrl = "https://ui-avatars.com/api/?name=${dataPost?.users?.name}"
 
         Glide.with(this@DetailPostActivity)
@@ -61,6 +62,12 @@ class DetailPostActivity : AppCompatActivity() {
         binding.nameOwner.text = dataPost?.users?.name
         binding.content.text = dataPost?.content
         binding.datePost.text = dataPost?.date?.let { convertTimestampToDate(it) }
+
+        val intent = Intent(this@DetailPostActivity, ProfileActivity::class.java)
+        intent.putExtra(ProfileActivity.USER_ID, idUser)
+
+        binding.avatar.setOnClickListener { startActivity(intent) }
+        binding.nameOwner.setOnClickListener { startActivity(intent) }
     }
     private fun formComment(idPost: String){
         binding.sendCommentBtn.setOnClickListener {

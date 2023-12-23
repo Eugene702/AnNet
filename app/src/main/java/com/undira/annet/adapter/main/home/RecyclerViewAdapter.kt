@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.undira.annet.activity.DetailPostActivity
+import com.undira.annet.activity.ProfileActivity
 import com.undira.annet.databinding.ComponentStatusCardBinding
 import com.undira.annet.model.PostGetAll
 
@@ -16,7 +17,7 @@ class RecyclerViewAdapter(
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(private val context: Context, private val view: ComponentStatusCardBinding ): RecyclerView.ViewHolder(view.root){
         fun bind(data: PostGetAll){
-            val profileUrl: String = "https://ui-avatars.com/api/?name=${data.users.name}"
+            val profileUrl = "https://ui-avatars.com/api/?name=${data.users.name}"
             Glide.with(context)
                 .load(profileUrl)
                 .into(view.avatar)
@@ -25,20 +26,27 @@ class RecyclerViewAdapter(
 
             val intent = Intent(view.root.context, DetailPostActivity::class.java)
             intent.putExtra(DetailPostActivity.DETAIL_POST, data)
+
             view.root.setOnClickListener { view.root.context.startActivity(intent) }
             view.commentBtn.setOnClickListener { view.root.context.startActivity(intent) }
+
+            val intentProfile = Intent(context, ProfileActivity::class.java)
+            intentProfile.putExtra(ProfileActivity.USER_ID, data.id_users)
+
+            view.avatar.setOnClickListener { context.startActivity(intentProfile) }
+            view.name.setOnClickListener { context.startActivity(intentProfile) }
         }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerViewAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ComponentStatusCardBinding = ComponentStatusCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(context, binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
     }
 

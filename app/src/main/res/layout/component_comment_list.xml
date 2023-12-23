@@ -20,6 +20,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/icon"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -42,6 +44,8 @@
                 app:layout_constraintTop_toBottomOf="@id/date"
                 app:layout_constraintStart_toStartOf="@id/date"
                 app:layout_constraintEnd_toEndOf="@id/date"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="@string/app_name"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
