@@ -30,4 +30,12 @@ class UserStore(val context: Context) {
     val getUuid: Flow<String?> = context.dataStore.data.map { it[USER_CREDENTIAL] }
     val getName: Flow<String?> = context.dataStore.data.map { it[USER_NAME] }
     val getEmail: Flow<String?> = context.dataStore.data.map { it[USER_EMAIL] }
+
+    suspend fun resetUser(){
+        context.dataStore.edit {
+            it.remove(USER_CREDENTIAL)
+            it.remove(USER_NAME)
+            it.remove(USER_EMAIL)
+        }
+    }
 }

@@ -128,7 +128,15 @@ class MainHomeFragment : Fragment() {
                         binding.searchBar.setOnMenuItemClickListener {
                             when(it.itemId){
                                 R.id.profile -> {
-                                    startActivity(Intent(requireContext(), ProfileActivity::class.java))
+                                    lifecycleScope.launch {
+                                        val intent = Intent(requireContext(), ProfileActivity::class.java)
+                                        val userID: String? = userStore.getUuid.first()
+
+                                        if(userID != null){
+                                            intent.putExtra(ProfileActivity.USER_ID, userID)
+                                            startActivity(intent)
+                                        }
+                                    }
                                     true
                                 }
                                 else -> false

@@ -13,14 +13,17 @@ import com.undira.annet.databinding.ActivityDetailPostBinding
 import com.undira.annet.model.CommentInput
 import com.undira.annet.model.CommentList
 import com.undira.annet.model.PostGetAll
+import com.undira.annet.store.UserStore
 import com.undira.annet.utils.convertTimestampToDate
 import com.undira.annet.view_model.detail_post.ViewModel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class DetailPostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPostBinding
     private lateinit var viewModel: ViewModel
     private var dataPost: PostGetAll? = null
+    private lateinit var userStore: UserStore
     companion object{
         const val DETAIL_POST: String = "POST"
     }
@@ -29,6 +32,7 @@ class DetailPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPostBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this@DetailPostActivity)[ViewModel::class.java]
+        userStore = UserStore(this@DetailPostActivity)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
@@ -76,9 +80,13 @@ class DetailPostActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     binding.sendCommentBtn.isEnabled = false
                     if(dataPost != null){
-                        viewModel.addComment(CommentInput(dataPost!!.id, dataPost!!.id_users, binding.commentInput.text.toString()))
-                        binding.commentInput.text?.clear()
-                        initializeRecyclerView(idPost)
+                        val userID: String? = userStore.getUuid.first()
+
+                        if(userID != null){
+                            viewModel.addComment(CommentInput(dataPost!!.id, userID, binding.commentInput.text.toString()))
+                            binding.commentInput.text?.clear()
+                            initializeRecyclerView(idPost)
+                        }
                     }
                     binding.sendCommentBtn.isEnabled = true
                 }

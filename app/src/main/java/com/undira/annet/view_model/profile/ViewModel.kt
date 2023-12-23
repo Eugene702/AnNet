@@ -3,10 +3,12 @@ package com.undira.annet.view_model.profile
 import androidx.lifecycle.ViewModel
 import com.undira.annet.config.Provider
 import com.undira.annet.model.Post
+import com.undira.annet.model.PostGetAll
 import com.undira.annet.model.User
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
-import io.github.jan.supabase.postgrest.result.PostgrestResult
+import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Order
 
 class ViewModel: ViewModel() {
     private val provider: SupabaseClient by lazy {
@@ -26,5 +28,16 @@ class ViewModel: ViewModel() {
                 User::id eq uuid
             }
         }.decodeSingle<User>()
+    }
+
+    suspend fun getStatusProfile(uuid: String): List<PostGetAll> {
+        return provider.from("posts").select(
+            columns = Columns.raw("id, id_users, content, date, users(name)".trimIndent())
+        ) {
+            order("date", Order.DESCENDING)
+            filter {
+                PostGetAll::id_users eq uuid
+            }
+        }.decodeList<PostGetAll>()
     }
 }

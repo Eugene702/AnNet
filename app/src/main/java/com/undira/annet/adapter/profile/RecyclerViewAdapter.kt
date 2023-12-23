@@ -6,20 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.undira.annet.databinding.ComponentStatusCardBinding
-import com.undira.annet.model.Post
+import com.undira.annet.model.PostGetAll
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private val data: ArrayList<Post>
+    private val data: List<PostGetAll>
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(private val context: Context, private val binding: ComponentStatusCardBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Post){
+        fun bind(data: PostGetAll){
+            val profileUrl = "https://ui-avatars.com/api/?name=${data.users.name}"
             Glide
                 .with(context)
-                .load(data.avatar)
+                .load(profileUrl)
                 .into(binding.avatar)
 
-            binding.name.text = data.name
+            binding.name.text = data.users.name
             binding.content.text = data.content
         }
     }
