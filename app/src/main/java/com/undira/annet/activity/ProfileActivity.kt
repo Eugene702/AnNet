@@ -112,6 +112,12 @@ class ProfileActivity : AppCompatActivity() {
 
         binding.nameProfile.text = userData?.name
         binding.emailProfile.text = userData?.email
+
+        binding.messageBtn.setOnClickListener {
+            val intent = Intent(this@ProfileActivity, ChatActivity::class.java)
+            intent.putExtra(ChatActivity.USER_OPPONENT, userData?.id)
+            startActivity(intent)
+        }
     }
 
     private suspend fun getUserDataFromStore(){

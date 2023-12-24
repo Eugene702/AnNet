@@ -1,11 +1,9 @@
 package com.undira.annet.view_model.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.undira.annet.config.Provider
 import com.undira.annet.model.User
 import com.undira.annet.model.UserLogin
-import com.undira.annet.store.UserStore
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
