@@ -29,3 +29,9 @@ data class UserLogin(
 data class UserPost(
     val name: String
 ): Parcelable
+
+@Serializable
+data class UserSearch(
+    val id: String,
+    val name: String
+)
