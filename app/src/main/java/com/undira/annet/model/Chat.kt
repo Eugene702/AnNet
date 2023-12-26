@@ -8,7 +8,12 @@ data class Chat (
     val id_chatroom: String,
     val id_user: String,
     val messages: String,
-    val date: String
+    val message_date: String
+)
+
+@Serializable
+data class GetChatByRoom(
+    val _chatroom_id: String
 )
 
 @Serializable
@@ -31,9 +36,9 @@ data class ChatRoomCheck(
 )
 
 @Serializable
-data class ChatRoomInserts(
-    val id: String?,
-    val date: String?
+data class GetIdRoomChat(
+    val _user_id: String,
+    val _opponent_id: String
 )
 
 @Serializable
@@ -47,4 +52,17 @@ data class ChatMessagesInsert(
 data class ChatParticipantsInsert(
     val id_chatroom: String,
     val id_user: String
+)
+
+@Serializable
+data class Inbox(
+    val user_id: String,
+    val user_name: String,
+    val messages: String,
+    val message_date: String
+)
+
+@Serializable
+data class GetInbox(
+    val _user_id: String
 )

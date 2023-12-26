@@ -1,26 +1,34 @@
 package com.undira.annet.adapter.main.chat
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.undira.annet.activity.ChatActivity
 import com.undira.annet.databinding.ComponentInboxListBinding
 import com.undira.annet.model.Inbox
+import com.undira.annet.utils.convertTimestampToDate
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private val data: ArrayList<Inbox>
+    private val data: List<Inbox>
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     class ViewHolder(private val context: Context, private val binding: ComponentInboxListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Inbox){
+            val profileUrl = "https://ui-avatars.com/api/?name=${data.user_name}"
             Glide.with(context)
-                .load(data.avatar)
+                .load(profileUrl)
                 .into(binding.avatar)
 
-            binding.date.text = data.date
-            binding.name.text = data.name
-            binding.message.text = data.message
+            binding.date.text = convertTimestampToDate(data.message_date)
+            binding.name.text = data.user_name
+            binding.message.text = data.messages
+
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra(ChatActivity.USER_OPPONENT, data.user_id)
+            binding.cardview.setOnClickListener { context.startActivity(intent) }
         }
     }
 

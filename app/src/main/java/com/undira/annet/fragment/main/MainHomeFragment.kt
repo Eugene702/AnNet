@@ -57,6 +57,13 @@ class MainHomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        lifecycleScope.launch {
+            initializeRecyclerView()
+        }
+        super.onResume()
+    }
+
     private suspend fun setupStatusBox(){
         val profileUrl = "https://ui-avatars.com/api/?name=${userStore.getName.first()}"
         Glide.with(requireContext())

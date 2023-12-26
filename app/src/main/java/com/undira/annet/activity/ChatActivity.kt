@@ -66,7 +66,7 @@ class ChatActivity : AppCompatActivity() {
     private suspend fun checkIfTheFirstChat(idUser: String){
         val checkGetIdChatRoom = viewModel.checkRoomExists(idUser, userOpponent!!)
         if(checkGetIdChatRoom){
-            idRoom = viewModel.getIdRoom(idUser, userOpponent!!).id_chatroom
+            idRoom = viewModel.getIdRoom(idUser, userOpponent!!).trim('"')
         }
     }
 

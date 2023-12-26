@@ -11,26 +11,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.undira.annet.R
 import com.undira.annet.activity.SearchActivity
 import com.undira.annet.adapter.main.chat.RecyclerViewAdapter
 import com.undira.annet.databinding.FragmentMainChatBinding
+import com.undira.annet.store.UserStore
 import com.undira.annet.view_model.main.chat.ViewModel
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class MainChatFragment : Fragment() {
     private lateinit var binding: FragmentMainChatBinding
     private lateinit var viewModel: ViewModel
+    private lateinit var userStore: UserStore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainChatBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this@MainChatFragment)[ViewModel::class.java]
-        initializeRecyclerView()
+        userStore = UserStore(requireContext())
+
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
+
+        initializeRecyclerView()
         return binding.root
+    }
+
+    override fun onResume() {
+        initializeRecyclerView()
+        super.onResume()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -46,7 +59,14 @@ class MainChatFragment : Fragment() {
     }
 
     private fun initializeRecyclerView(){
-        binding.recyclerView.adapter = RecyclerViewAdapter(requireContext(), viewModel.data)
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        lifecycleScope.launch {
+            val userId: String? = userStore.getUuid.first()
+
+            if(userId != null){
+                val data = viewModel.getInbox(userId)
+                binding.recyclerView.adapter = RecyclerViewAdapter(requireContext(), data)
+                binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 }
