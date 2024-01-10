@@ -3,6 +3,8 @@
         <item name="fontFamily">@font/poppins_regular</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/icon</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="BottomAppBarTheme" parent="Widget.Material3.BottomNavigationView">
@@ -10,8 +12,9 @@
     </style>
 
     <style name="BottomAppBarThemeOverlay" parent="">
-        <item name="colorOnSecondaryContainer">@color/primary</item>
-        <item name="colorOnSurface">@color/primary</item>
+        <item name="colorSecondaryContainer">@color/primary_alpha50</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
     </style>
 
     <style name="Theme.AnNet" parent="Base.Theme.AnNet" />

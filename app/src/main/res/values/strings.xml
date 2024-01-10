@@ -5,4 +5,25 @@
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="notification">Notification</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_somebody">Find somebody...</string>
+    <string name="sample_profile_ink">https://xsgames.co/randomusers/avatar.php?g=female</string>
+    <string name="write_something">Write something...</string>
+    <string name="post">Post</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+    <string name="enter_your_comment">Enter your comment</string>
+    <string name="message">Message</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="signin">Signin</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="loading">Loading...</string>
 </resources>

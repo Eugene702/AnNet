@@ -3,9 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:backgroundTint="@color/background"
+    tools:context=".activity.MainActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         style="@style/BottomAppBarTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,6 +20,8 @@
         app:menu="@menu/main_menu"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="selected"
-        app:backgroundTint="@android:color/transparent"/>
+        app:backgroundTint="@android:color/white">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
