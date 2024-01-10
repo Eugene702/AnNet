@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             checkUserLogin()
             configureBottomNavigation()
-            initializeViewPager()
         }
 
     }
@@ -45,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         if(credential == null){
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             finish()
+        }else{
+            initializeViewPager()
         }
     }
 
